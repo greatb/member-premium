@@ -1,5 +1,10 @@
 # Desing Helper
 
+# Tech Stack
+- Angular
+- DotNet
+- Bootstrap
+
 ## API Interfaces
 POST api/members
 {
@@ -48,5 +53,12 @@ GET  api/occupations
 - As this is a demo project for UI integration DB is not in place
 
 ## Project
-- Angular
-- DotNet
+### Angular
+
+#### Components
+- Member list
+- Member Add
+- Member View
+
+### API DotNet
+
