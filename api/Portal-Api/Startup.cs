@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Portal_Api
+namespace Portal
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace Portal_Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Portal_Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Portal", Version = "v1" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace Portal_Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Portal_Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Portal v1"));
             }
 
             app.UseHttpsRedirection();

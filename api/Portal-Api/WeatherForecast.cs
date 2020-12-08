@@ -1,6 +1,6 @@
 using System;
 
-namespace Portal_Api
+namespace Portal
 {
     public class WeatherForecast
     {

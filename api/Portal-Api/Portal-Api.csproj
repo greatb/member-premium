@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Portal_Api</RootNamespace>
+    <RootNamespace>Portal</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
