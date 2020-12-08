@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectOption } from 'src/app/_models/selectOption';
+import { OccupationService } from 'src/app/_services/occupation.service';
 
 @Component({
   selector: 'app-member-new',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberNewComponent implements OnInit {
 
-  constructor() { }
+  occupations: SelectOption[]; 
+  
+  constructor(private occupationService: OccupationService) { }
 
   ngOnInit() {
+    this.occupationService.getAllOccupation().subscribe(occupationList => {
+      this.occupations = occupationList;
+    });
   }
 
 }

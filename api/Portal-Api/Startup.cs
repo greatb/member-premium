@@ -30,6 +30,15 @@ namespace Portal
 
             services.AddControllers();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    );
+            });
+
             services.AddSingleton<IOccupationService, OccupationService>();
             services.AddSwaggerGen(c =>
             {
@@ -50,6 +59,7 @@ namespace Portal
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
