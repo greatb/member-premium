@@ -28,7 +28,7 @@ GET  api/members/{id}
 	"name": "",
 	"age": 0,
 	"dateOfBirth": Date,
-	"occupation": 0,
+	"occupationId": 0,
 	"deathSumInsured": 0,
 	"deathPremium": 0
 }
