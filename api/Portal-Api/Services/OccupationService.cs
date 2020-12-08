@@ -2,6 +2,7 @@
 using Portal.Extensions;
 using Portal.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Portal.Services
 {
@@ -21,6 +22,11 @@ namespace Portal.Services
         public IList<SelectOption> GetOccupation()
         {
             return Occupation.Author.ToDescripDictionary().ToOptionList();
+        }
+
+        public decimal GetFactor(Occupation occupation)
+        {
+            return occupations.Where(x => x.OccupationType == occupation).FirstOrDefault().OccupationRating;
         }
     }
 }

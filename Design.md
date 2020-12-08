@@ -33,7 +33,7 @@ GET  api/members/{id}
 	"deathPremium": 0
 }
 
-GET  api/members/{id}/premium?occupationId={occupationId}
+GET  api/calculations/premium?occupationId={occupationId}&coverAmount={coverAmount}&age={age}
 {
 	"deathPremium": 0
 }
@@ -64,3 +64,4 @@ GET  api/occupations
 
 ## Notes
 - Occupation/OccupationRating data should be stored in a db, but for this demo , its stored as enums
+- no unit test for AP
