@@ -62,3 +62,5 @@ GET  api/occupations
 
 ### API DotNet
 
+## Notes
+- Occupation/OccupationRating data should be stored in a db, but for this demo , its stored as enums
