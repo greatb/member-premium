@@ -64,10 +64,6 @@ export class MemberNewComponent implements OnInit {
     }
   }
 
-  onChangeOccupation(item: SelectOption) {
-    this.calculatePremimum();
-  }
-
   onSubmit(){
     if(this.oneForm.valid){
       alert("Form Submitted");
