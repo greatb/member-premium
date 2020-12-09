@@ -17,7 +17,7 @@ export class MemberNewComponent implements OnInit {
   calculatedPremium: number = 0;
   formData: MemberRequest = new MemberRequest();
   oneForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
     dateOfBirth: new FormControl(''),
     occupationId: new FormControl(0, [Validators.required, Validators.min(1)]),
     deathSumInsured: new FormControl(0, [Validators.required, Validators.min(1)])
@@ -34,12 +34,10 @@ export class MemberNewComponent implements OnInit {
     });
 
     this.oneForm.valueChanges.subscribe(x => {
+      this.formData = this.oneForm.value;
+      this.formData.age = this.ageFromDateOfBirthday(new Date(this.formData.dateOfBirth));
       this.calculatePremimum();
     });
-  }
-
-  onDateChange() {
-    this.formData.age = this.ageFromDateOfBirthday(this.formData.dateOfBirth);
   }
 
   public ageFromDateOfBirthday(dateOfBirth: any): number {
@@ -52,7 +50,9 @@ export class MemberNewComponent implements OnInit {
       age--;
     }
 
-    return age;
+    if (age > 0)
+      return age;
+    return 0;
   }
 
   calculatePremimum(){
@@ -67,29 +67,6 @@ export class MemberNewComponent implements OnInit {
   onChangeOccupation(item: SelectOption) {
     this.calculatePremimum();
   }
-
-  /*resetErrorMessages() {
-    this.errors.length = 0;
-  }
-
-  generateErrorMessages(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(controlName => {
-      let control = formGroup.controls[controlName];
-      let errors = control.errors;
-
-      if (errors === null || errors.count === 0) {
-        return;
-      }
-      // Handle the 'required' case
-      if (errors.required) {
-        this.errors.push(`${controlName} is required`);
-      }
-      // Handle 'minlength' case
-      if (errors.minlength) {
-        this.errors.push(`${controlName} minimum length is ${errors.minlength.requiredLength}.`);
-      }
-    });
-  }*/
 
   onSubmit(){
     if(this.oneForm.valid){
