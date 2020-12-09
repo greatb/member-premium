@@ -61,3 +61,4 @@ This project is for Front End Developer at TAL
 - Occupation/OccupationRating data should be stored in a db, but for this demo , its stored as enums
 - no unit test for AP
 - As this is a demo project for UI integration DB is not in place
+- For date picker and money input control a suitable npm package could be used to format
