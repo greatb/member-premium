@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MemberRequest } from 'src/app/_models/memberRequest';
@@ -14,10 +15,9 @@ export class MemberNewComponent implements OnInit {
 
   occupations: SelectOption[]; 
   calculatedPremium: number = 0;
-
+  formData: MemberRequest = new MemberRequest();
   oneForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    age: new FormControl(0, [Validators.required, Validators.min(18)]),
     dateOfBirth: new FormControl(''),
     occupationId: new FormControl(0, [Validators.required, Validators.min(1)]),
     deathSumInsured: new FormControl(0, [Validators.required, Validators.min(1)])
@@ -38,17 +38,63 @@ export class MemberNewComponent implements OnInit {
     });
   }
 
+  onDateChange() {
+    this.formData.age = this.ageFromDateOfBirthday(this.formData.dateOfBirth);
+  }
+
+  public ageFromDateOfBirthday(dateOfBirth: any): number {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age;
+  }
+
   calculatePremimum(){
     if (this.oneForm.valid)
     {
-      let formData : MemberRequest = this.oneForm.value;
-      this.calculationService.calculatePremium(formData.occupationId, formData.deathSumInsured, formData.age)
+      this.formData = this.oneForm.value;
+      this.calculationService.calculatePremium(this.formData.occupationId, this.formData.deathSumInsured, this.formData.age)
         .subscribe(d => this.calculatedPremium = d);
     }
   }
 
   onChangeOccupation(item: SelectOption) {
     this.calculatePremimum();
+  }
+
+  /*resetErrorMessages() {
+    this.errors.length = 0;
+  }
+
+  generateErrorMessages(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(controlName => {
+      let control = formGroup.controls[controlName];
+      let errors = control.errors;
+
+      if (errors === null || errors.count === 0) {
+        return;
+      }
+      // Handle the 'required' case
+      if (errors.required) {
+        this.errors.push(`${controlName} is required`);
+      }
+      // Handle 'minlength' case
+      if (errors.minlength) {
+        this.errors.push(`${controlName} minimum length is ${errors.minlength.requiredLength}.`);
+      }
+    });
+  }*/
+
+  onSubmit(){
+    if(this.oneForm.valid){
+      alert("Form Submitted");
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 export class MemberRequest  {
     name: string;
-    age: number;
+    age: number = 0;
     dateOfBirth: Date;
     occupationId: number;
     deathSumInsured: number;
