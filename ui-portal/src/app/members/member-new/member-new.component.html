@@ -1,29 +1,55 @@
-<form [formGroup]="oneForm">
-  <div class="form-group">
-    <label>Name</label>
-    <input type="text" formControlName="name" class="form-control">
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Member form</h2>
   </div>
-  <div class="form-group">
-    <label>Age</label>
-    <span class="form-control">{{formData.age}}</span>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Premium</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Death Premium</h6>
+          </div>
+          <span class="text-muted">{{calculatedPremium | currency}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Details</h4>
+      <form [formGroup]="oneForm" id="memberForm">
+        <div class="row">
+          <div class="col mb-3">
+            <label for="firstName">Name</label>
+            <input type="text" formControlName="name" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Date of Birth</label>
+            <input type="date" formControlName="dateOfBirth" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Age</label>
+            <span class="form-control">{{formData.age}}</span>
+          </div>
+        </div>
+        <div class="col mb-3">
+          <label for="firstName">Occupation</label>
+          <select class="custom-select d-block w-100 form-control" formControlName="occupationId" (change)="onChangeOccupation(item)">
+            <option [value]="occupation.id" *ngFor="let occupation of occupations">{{occupation.name}}</option>
+          </select>
+        </div>
+        <div class="col mb-3">
+          <label for="firstName">Death Sum Insured</label>
+          <input type="number" formControlName="deathSumInsured" class="form-control">
+        </div>
+
+        <hr class="mb-4">
+        <button type="submit" (click)="onSubmit()" [disabled]="!oneForm.valid" class="btn btn-primary">Submit</button>
+
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label>Date of Birth</label>
-    <input type="date" formControlName="dateOfBirth" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Occupation</label>
-    <select class="form-control" formControlName="occupationId" (change)="onChangeOccupation(item)">
-        <option [value]="occupation.id" *ngFor="let occupation of occupations">{{occupation.name}}</option>
-        </select>
-  </div>
-  <div class="form-group">
-    <label>Death Sum Insured</label>
-    <input type="number" formControlName="deathSumInsured" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Death Premium</label>
-    <span>{{calculatedPremium | currency}}</span>
-  </div>
-  <button type="submit" (click)="onSubmit()" [disabled]="!oneForm.valid" class="btn btn-primary">Submit</button>
-</form>
